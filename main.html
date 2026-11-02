@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica FisioVida & Saúde</title>
+    
+    <!-- Fonte Google Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --accent: #0d9488;
+            --accent-light: #ccfbf1;
+            --bg-main: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.01);
+            --shadow-lg: 0 20px 30px -10px rgba(2, 132, 199, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Bar & Header Sticky Nav */
+        .header-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 16px 24px;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+            color: white;
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #bae6fd;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .hero-btn:hover {
+            background: #0f766e;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(13, 148, 136, 0.5);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1000px;
+            margin: -40px auto 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        section {
+            background: var(--surface);
+            padding: 40px;
+            margin-bottom: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        section h2::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        section h3 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin: 36px 0 16px 0;
+            font-weight: 700;
+        }
+
+        /* Grid de Especialidades Interativo */
+        .grid-especialidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .card-especialidade {
+            background: var(--bg-main);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .card-especialidade:hover {
+            background: var(--surface);
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(2, 132, 199, 0.08);
+        }
+
+        .card-especialidade-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .card-especialidade-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-check {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .icon-toggle {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .card-especialidade.ativa .icon-toggle {
+            transform: rotate(45deg);
+        }
+
+        .card-especialidade-descricao {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, margin-top 0.35s ease;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .card-especialidade.ativa {
+            border-color: var(--primary);
+            background: #f0f9ff;
+        }
+
+        .card-especialidade.ativa .card-especialidade-descricao {
+            max-height: 140px;
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(2, 132, 199, 0.2);
+        }
+
+        /* Lista escondida para acessibilidade/SEO mantendo marcação original */
+        ul.especialidades-list {
+            display: none;
+        }
+
+        /* Mídia / Imagens e Vídeos */
+        .conteudo-centralizado {
+            text-align: center;
+            margin: 24px 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: #000;
+        }
+
+        .conteudo-centralizado img, 
+        .conteudo-centralizado video {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+            border-radius: var(--radius-md);
+        }
+
+        /* Tabelas estilizadas */
+        .table-container {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background: var(--surface);
+        }
+
+        th, td {
+            padding: 16px 20px;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--bg-main);
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Links Externos */
+        .link-externo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: var(--primary-light);
+            transition: background 0.2s;
+        }
+
+        .link-externo:hover {
+            background: #bae6fd;
+        }
+
+        /* Formulario Moderno */
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        form p {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            transition: all 0.2s ease;
+        }
+
+        form input:focus, form select:focus {
+            background-color: var(--surface);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-light);
+            outline: none;
+        }
+
+        .btn-acao {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 24px;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-acao:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .btn-acao:active {
+            transform: translateY(0);
+        }
+
+        #mensagem-sucesso {
+            display: none;
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* Responsividade */
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 24px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Fixo Moderno -->
+    <header class="header-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">+</div>
+                FisioVida
+            </a>
+            <nav aria-label="Navegação Principal">
+                <a href="#especialidades">Especialidades</a>
+                <a href="#espaco">Estrutura</a>
+                <a href="#agendamento">Agendamento</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Clínica FisioVida & Saúde</h1>
+            <p>Reabilitação especializada, alívio de dores e qualidade de vida para você!</p>
+            <a href="#agendamento" class="hero-btn">Agendar Consulta</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="especialidades">
+            <h2>Nossas Especialidades</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Clique em qualquer especialidade para ver a explicação detalhada:</p>
+            
+            <!-- Lista visual formatada como Grid Moderno com Interatividade -->
+            <div class="grid-especialidades">
+                <div class="card-especialidade" onclick="this.classList.toggle('ativa')">
+                    <div class="card-especialidade-header">
+                        <div class="card-especialidade-title">
+                            <span class="icon-check">✓</span>
+                            <span>Fisioterapia Ortopédica e Traumatológica</span>
+                        </div>
+                        <span class="icon-toggle">+</span>
+                    </div>
+                    <div class="card-especialidade-descricao">
+                        Tratamento focado na recuperação de lesões musculares, fraturas, entorses e no pós-operatório ortopédico, aliviando a dor e restaurando a mobilidade.
+                    </div>
+                </div>
+
+                <div class="card-especialidade" onclick="this.classList.toggle('ativa')">
+                    <div class="card-especialidade-header">
+                        <div class="card-especialidade-title">
+                            <span class="icon-check">✓</span>
+                            <span>Reabilitação Postural Global (RPG)</span>
+                        </div>
+                        <span class="icon-toggle">+</span>
+                    </div>
+                    <div class="card-especialidade-descricao">
+                        Método terapêutico manual para correção de desvios na coluna, problemas posturais e alívio de dores crônicas através de alongamentos globais.
+                    </div>
+                </div>
+
+                <div class="card-especialidade" onclick="this.classList.toggle('ativa')">
+                    <div class="card-especialidade-header">
+                        <div class="card-especialidade-title">
+                            <span class="icon-check">✓</span>
+                            <span>Fisioterapia Desportiva</span>
+                        </div>
+                        <span class="icon-toggle">+</span>
+                    </div>
+                    <div class="card-especialidade-descricao">
+                        Especialidade dedicada à prevenção e reabilitação de lesões em atletas profissionais e amadores, visando o retorno rápido e seguro ao esporte.
+                    </div>
+                </div>
+
+                <div class="card-especialidade" onclick="this.classList.toggle('ativa')">
+                    <div class="card-especialidade-header">
+                        <div class="card-especialidade-title">
+                            <span class="icon-check">✓</span>
+                            <span>Pilates Terapêutico</span>
+                        </div>
+                        <span class="icon-toggle">+</span>
+                    </div>
+                    <div class="card-especialidade-descricao">
+                        Exercícios guiados por fisioterapeutas focados no fortalecimento do core, ganho de flexibilidade, estabilização articular e consciência corporal.
+                    </div>
+                </div>
+
+                <div class="card-especialidade" onclick="this.classList.toggle('ativa')">
+                    <div class="card-especialidade-header">
+                        <div class="card-especialidade-title">
+                            <span class="icon-check">✓</span>
+                            <span>Acupuntura e Ventosaterapia</span>
+                        </div>
+                        <span class="icon-toggle">+</span>
+                    </div>
+                    <div class="card-especialidade-descricao">
+                        Técnicas integrativas eficazes para relaxamento muscular profundo, melhora da circulação e alívio rápido de pontos de tensão e dor.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manutenção do elemento UL original para retrocompatibilidade -->
+            <ul class="especialidades-list">
+                <li>Fisioterapia Ortopédica e Traumatológica</li>
+                <li>Reabilitação Postural Global (RPG)</li>
+                <li>Fisioterapia Desportiva</li>
+                <li>Pilates Terapêutico</li>
+                <li>Acupuntura e Ventosaterapia</li>
+            </ul>
+
+            <div class="conteudo-centralizado">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop" 
+                     alt="Sessão de fisioterapia na clínica" 
+                     width="400">
+            </div>
+
+            <h3>Horário de Atendimento</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Horário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Segunda a Sexta</td>
+                            <td>07:00 às 20:00</td>
+                        </tr>
+                        <tr>
+                            <td>Sábado</td>
+                            <td>08:00 às 13:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin-top: 25px; font-size: 0.95rem; color: var(--text-muted);">
+                Saiba mais sobre cuidados posturais no portal 
+                <a href="https://abrafin.org.br" target="_blank" rel="noopener noreferrer" class="link-externo">Associação de Reabilitação</a>.
+            </p>
+        </section>
+
+        <section id="espaco">
+            <h2>Nossa Estrutura</h2>
+            
+            <div class="conteudo-centralizado">
+                <video controls autoplay loop muted playsinline 
+                       poster="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop" 
+                       width="400">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    O seu navegador não consegue reproduzir este vídeo.
+                </video>
+            </div>
+        </section>
+
+        <section id="agendamento">
+            <h2>Faça seu Agendamento</h2>
+            <form id="form-agendamento">
+                <fieldset>
+                    <legend>Dados do Paciente</legend>
+
+                    <p>
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                    </p>
+
+                    <p>
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                    </p>
+
+                    <p>
+                        <label for="whatsapp">WhatsApp (com DDD, 11 dígitos):</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" pattern="[0-9]{11}" maxlength="11" placeholder="83999999999" required>
+                    </p>
+
+                    <p>
+                        <label for="tratamento">Escolha o Tratamento:</label>
+                        <select id="tratamento" name="tratamento" required>
+                            <option value="">Selecione o procedimento...</option>
+                            <option value="ortopedica">Fisioterapia Ortopédica</option>
+                            <option value="rpg">Sessão de RPG</option>
+                            <option value="desportiva">Fisioterapia Desportiva</option>
+                            <option value="pilates">Pilates Terapêutico</option>
+                            <option value="acupuntura">Acupuntura e Ventosaterapia</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="data-consulta">Data Desejada:</label>
+                        <input type="date" id="data-consulta" name="data-consulta" required>
+                    </p>
+                </fieldset>
+
+                <br>
+                <button type="submit" class="btn-acao">Confirmar Agendamento</button>
+
+                <div id="mensagem-sucesso">Agendamento concluído com sucesso! Entraremos em contato em breve.</div>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Clínica FisioVida & Saúde. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script JavaScript mantendo todas as validações e relatórios no console -->
+    <script>
+        const procedimentosFisio = [
+            { nome: "Avaliação Postural", preco: 120, categoriaPreventiva: "Prevenção" },
+            { nome: "Sessão de Fisioterapia Ortopédica", preco: 150, categoriaPreventiva: "Reabilitação" },
+            { nome: "Pacote RPG (Mensal)", preco: 450, categoriaPreventiva: "Postura" },
+            { nome: "Liberação Miofascial", preco: 100, categoriaPreventiva: "Alívio Rápido" },
+            { nome: "Reabilitação Desportiva Completa", preco: 600, categoriaPreventiva: "Performance" },
+            { nome: "Pilates Terapêutico (Sessão)", preco: 90, categoriaPreventiva: "Condicionamento" },
+            { nome: "Acupuntura e Ventosaterapia", preco: 130, categoriaPreventiva: "Alívio Rápido" }
+        ];
+
+        let entradaUsuario = prompt("Informe um valor limite de orçamento para filtrar os tratamentos:");
+        let limiteOrcamento = Number(entradaUsuario);
+
+        if (entradaUsuario === null || entradaUsuario.trim() === "" || isNaN(limiteOrcamento)) {
+            console.warn("Entrada inválida ou cancelada. Usando valor padrão de R$ 200.");
+            limiteOrcamento = 200;
+        }
+
+        console.log("=== RELATÓRIO DE PROCEDIMENTOS - FISIOVIDA ===");
+        console.log(`Orçamento limite informado: R$ ${limiteOrcamento}`);
+
+        console.log("\n--- Classificação de Custos ---");
+        for (let proc of procedimentosFisio) {
+            let faixaPreco = "";
+            if (proc.preco <= 120) {
+                faixaPreco = "Acessível";
+            } else if (proc.preco <= 300) {
+                faixaPreco = "Intermediário";
+            } else {
+                faixaPreco = "Especializado";
+            }
+            console.log(`Procedimento: ${proc.nome} | Preço: R$ ${proc.preco} | Categoria: ${faixaPreco}`);
+        }
+
+        console.log("\n--- Mensagens por Categoria (Switch) ---");
+        for (let proc of procedimentosFisio) {
+            let mensagem = "";
+            switch (proc.categoriaPreventiva) {
+                case "Reabilitação":
+                    mensagem = "Focado em recuperação de lesões e cirurgias.";
+                    break;
+                case "Postura":
+                    mensagem = "Correção do alinhamento e dores na coluna.";
+                    break;
+                case "Alívio Rápido":
+                    mensagem = "Redução imediata de tensão muscular.";
+                    break;
+                case "Condicionamento":
+                    mensagem = "Fortalecimento e flexibilidade corporal.";
+                    break;
+                default:
+                    mensagem = "Atendimento focado em bem-estar geral.";
+                    break;
+            }
+            console.log(`[${proc.categoriaPreventiva}] ${proc.nome}: ${mensagem}`);
+        }
+
+        let somaPrecos = 0;
+        let servicosAcessiveis = 0;
+        for (let i = 0; i < procedimentosFisio.length; i++) {
+            somaPrecos += procedimentosFisio[i].preco;
+            if (procedimentosFisio[i].preco <= limiteOrcamento) {
+                servicosAcessiveis++;
+            }
+        }
+        let mediaPrecos = somaPrecos / procedimentosFisio.length;
+
+        console.log("\n--- Resumo Estatístico ---");
+        console.log(`Média de preço dos procedimentos: R$ ${mediaPrecos.toFixed(2)}`);
+        console.log(`Quantidade de tratamentos dentro do orçamento (R$ ${limiteOrcamento}): ${servicosAcessiveis}`);
+
+        console.table(procedimentosFisio);
+
+        const form = document.getElementById("form-agendamento");
+        const mensagemSucesso = document.getElementById("mensagem-sucesso");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById("email").value;
+            const whatsappInput = document.getElementById("whatsapp").value;
+
+            if (!emailInput.includes("@") || !emailInput.includes(".")) {
+                alert("Atenção: O e-mail informado é inválido! Faltam caracteres essenciais como '@' ou '.'");
+                return;
+            }
+
+            if (whatsappInput.length !== 11 || isNaN(Number(whatsappInput))) {
+                alert("Atenção: O WhatsApp deve conter exatamente 11 dígitos numéricos (com DDD).");
+                return;
+            }
+
+            mensagemSucesso.style.display = "block";
+            form.reset();
+
+            setTimeout(function() {
+                mensagemSucesso.style.display = "none";
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
