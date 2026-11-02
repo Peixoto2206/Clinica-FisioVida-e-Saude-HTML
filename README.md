@@ -15,6 +15,6 @@ Este documento apresenta a avaliação técnica detalhada do código desenvolvid
 
 ## 🚀 Conclusão e Nota Sugerida
 
-* **Status:** Aprovado com louvor.
-* **Nota Sugerida:** **9.5 / 10 (Excelente)**.
+* **Status:** Aprovado.
+* **Nota Sugerida:** **9 / 10 (Excelente)**.
 * **Considerações Finais:** O código atende plenamente e com grande qualidade técnica aos requisitos propostos, demonstrando domínio completo do desenvolvimento web estático.
